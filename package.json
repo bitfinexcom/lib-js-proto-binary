@@ -10,7 +10,7 @@
     "int64-buffer": "^0.99.1007"
   },
   "engine": {
-    "node": ">=6.0"
+    "node": ">=10.4"
   },
   "license": "Apache-2.0",
   "repository": {

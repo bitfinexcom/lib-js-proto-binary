@@ -56,14 +56,18 @@ const fBookEntry = (symType, symId, prl, e, seq) => {
   b.fill((new UInt64BE(seq)).toBuffer(), 2)
   b.writeUInt32BE(symId, 10)
 
-  if (prl[0] === 'R') {
-    b.fill((new UInt64BE(e[1])).toBuffer(), 14)
-    b.fill((new UInt64BE(parseInt(e[2] * libCommon.DEF_MULTIPLIER))).toBuffer(), 20)
-    b.fill((new UInt64BE(parseInt(e[3] * libCommon.DEF_MULTIPLIER))).toBuffer(), 28)
+  if (symType === 'f') {
+
   } else {
-    b.fill((new UInt64BE(parseInt(e[1] * libCommon.DEF_MULTIPLIER))).toBuffer(), 14)
-    b.fill((new UInt64BE(e[2])).toBuffer(), 20)
-    b.fill((new UInt64BE(parseInt(e[3] * libCommon.DEF_MULTIPLIER))).toBuffer(), 28)
+    if (prl[0] === 'R') {
+      b.fill((new UInt64BE(e[1])).toBuffer(), 14)
+      b.fill((new UInt64BE((BigInt(e[3]) * BigInt(libCommon.DEF_MULTIPLIER)).toString(16), 16)).toBuffer(), 20)
+      b.fill((new UInt64BE((BigInt(e[4]) * BigInt(libCommon.DEF_MULTIPLIER)).toString(16), 16)).toBuffer(), 28)
+    } else {
+      b.fill((new UInt64BE((BigInt(e[1]) * BigInt(libCommon.DEF_MULTIPLIER)).toString(16), 16)).toBuffer(), 14)
+      b.fill((new UInt64BE(e[3])).toBuffer(), 20)
+      b.fill((new UInt64BE((BigInt(e[4]) * BigInt(libCommon.DEF_MULTIPLIER)).toString(16), 16)).toBuffer(), 28)
+    }
   }
 
   return b
