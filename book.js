@@ -1,3 +1,5 @@
+const UInt64BE = require('int64-buffer').Uint64BE
+
 const MSG_TYPES = {
   t_bu_a:
   4 + // SYM
