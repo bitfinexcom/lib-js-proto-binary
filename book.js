@@ -33,27 +33,27 @@ const getBookMsgSize = (symType, prl) => {
     MSG_TYPES[`${symType}_bu_${sfx}`]
 }
 
-const fBookCheckPoint = (symType, symId, prl, type) => {
+const fBookCheckPoint = (symType, symId, prl, type, seq) => {
   const msize = getBookMsgSize(symType, prl)
 
   const b = Buffer.allocUnsafe(1 + 1 + msize)
 
   b.writeUInt8(20 + type, 0)
   b.writeUInt8(msize, 1)
-  b.fill((new UInt64BE(0)).toBuffer(), 2)
+  b.fill((new UInt64BE(seq)).toBuffer(), 2)
   b.writeUInt32BE(symId, 10)
 
   return b
 }
 
-const fBookEntry = (symType, symId, prl, e) => {
+const fBookEntry = (symType, symId, prl, e, seq) => {
   const msize = getBookMsgSize(symType, prl)
 
   const b = Buffer.allocUnsafe(1 + 1 + msize)
 
   b.writeUInt8(25, 0)
   b.writeUInt8(msize, 1)
-  b.fill((new UInt64BE(0)).toBuffer(), 2)
+  b.fill((new UInt64BE(seq)).toBuffer(), 2)
   b.writeUInt32BE(symId, 10)
 
   if (prl[0] === 'R') {
