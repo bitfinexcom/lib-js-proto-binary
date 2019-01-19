@@ -31,7 +31,7 @@ const getBookMsgSize = (symType, prl) => {
 }
 
 const fBookCheckPoint = (symId, prl, type) => {
-  const msize = this._getBookMsgSize(symId, prl)
+  const msize = getBookMsgSize(symId, prl)
 
   const b = Buffer.allocUnsafe(1 + 1 + msize)
 
@@ -44,7 +44,7 @@ const fBookCheckPoint = (symId, prl, type) => {
 }
 
 const fBookEntry = (symId, prl, e) => {
-  const msize = this._getBookMsgSize(symId, prl)
+  const msize = getBookMsgSize(symId, prl)
 
   const b = Buffer.allocUnsafe(1 + 1 + msize)
 
