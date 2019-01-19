@@ -1,5 +1,10 @@
 const UInt64BE = require('int64-buffer').Uint64BE
+const BN = require('bignumber.js')
 const libCommon = require('./common')
+
+const nBN = v => {
+  return new BN(v)
+}
 
 const MSG_TYPES = {
   t_bu_a:
@@ -61,12 +66,12 @@ const fBookEntry = (symType, symId, prl, e, seq) => {
   } else {
     if (prl[0] === 'R') {
       b.fill((new UInt64BE(e[1])).toBuffer(), 14)
-      b.fill((new UInt64BE((BigInt(e[3]) * BigInt(libCommon.DEF_MULTIPLIER)).toString(16), 16)).toBuffer(), 20)
-      b.fill((new UInt64BE((BigInt(e[4]) * BigInt(libCommon.DEF_MULTIPLIER)).toString(16), 16)).toBuffer(), 28)
+      b.fill((new UInt64BE(nBN(e[3]).mul(libCommon.DEF_MULTIPLIER).dp(0).toString(16), 16)).toBuffer(), 20)
+      b.fill((new UInt64BE(nBN(e[4]).mul(libCommon.DEF_MULTIPLIER).dp(0).toString(16), 16)).toBuffer(), 28)
     } else {
-      b.fill((new UInt64BE((BigInt(e[1]) * BigInt(libCommon.DEF_MULTIPLIER)).toString(16), 16)).toBuffer(), 14)
+      b.fill((new UInt64BE(nBN(e[1]).mul(libCommon.DEF_MULTIPLIER).dp(0).toString(16), 16)).toBuffer(), 14)
       b.fill((new UInt64BE(e[3])).toBuffer(), 20)
-      b.fill((new UInt64BE((BigInt(e[4]) * BigInt(libCommon.DEF_MULTIPLIER)).toString(16), 16)).toBuffer(), 28)
+      b.fill((new UInt64BE(nBN(e[4]).mul(libCommon.DEF_MULTIPLIER).dp(0).toString(16), 16)).toBuffer(), 28)
     }
   }
 

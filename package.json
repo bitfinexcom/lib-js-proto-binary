@@ -1,12 +1,13 @@
 {
   "name": "@bitfinex/lib-js-proto-binary",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Bitfinex Lib Protocol Binary",
   "author": "prdn <paolo@bitfinex.com> (https://bitfinex.com/)",
   "keywords": [
     "bitfinex"
   ],
   "dependencies": {
+    "bignumber.js": "^8.0.2",
     "int64-buffer": "^0.99.1007"
   },
   "engine": {
