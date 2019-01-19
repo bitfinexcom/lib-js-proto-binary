@@ -66,3 +66,7 @@ const fBookEntry = (symId, prl, e) => {
   return b
 }
 
+module.exports = {
+  fBookCheckPoint: fBookCheckPoint,
+  fBookEntry: fBookEntry,
+}
