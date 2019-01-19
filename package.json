@@ -1,0 +1,20 @@
+{
+  "name": "@bitfinex/lib-js-proto-binary",
+  "version": "0.0.1",
+  "description": "Bitfinex Lib Protocol Binary",
+  "author": "prdn <paolo@bitfinex.com> (https://bitfinex.com/)",
+  "keywords": [
+    "bitfinex"
+  ],
+  "dependencies": {
+    "int64-buffer": "^0.99.1007"
+  },
+  "engine": {
+    "node": ">=6.0"
+  },
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bitfinexcom/lib-js-proto-binary.git"
+  }
+}
