@@ -1,6 +1,6 @@
 {
   "name": "@bitfinex/lib-js-proto-binary",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Bitfinex Lib Protocol Binary",
   "author": "prdn <paolo@bitfinex.com> (https://bitfinex.com/)",
   "keywords": [
