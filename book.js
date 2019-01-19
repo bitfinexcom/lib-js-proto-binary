@@ -72,12 +72,12 @@ const fBookEntry = (symType, symId, prl, e, seq) => {
       b.fill((new UInt64BE(e[1])).toBuffer(), 14)
       b.fill((new UInt64BE(nBN(e[3]).times(libCommon.DEF_MULTIPLIER).dp(0).toString(16), 16)).toBuffer(), 22)
       b.fill((new UInt64BE(nBN(e[4]).times(libCommon.DEF_MULTIPLIER).abs().dp(0).toString(16), 16)).toBuffer(), 30),
-      b.writeUInt8(e[4] >= 0 ? 0 : 1)
+      b.writeUInt8(e[4] >= 0 ? 0 : 1, 38)
     } else {
       b.fill((new UInt64BE(nBN(e[1]).times(libCommon.DEF_MULTIPLIER).dp(0).toString(16), 16)).toBuffer(), 14)
       b.fill((new UInt64BE(e[3])).toBuffer(), 22)
       b.fill((new UInt64BE(nBN(e[4]).times(libCommon.DEF_MULTIPLIER).abs().dp(0).toString(16), 16)).toBuffer(), 30),
-      b.writeUInt8(e[4] >= 0 ? 0 : 1)
+      b.writeUInt8(e[4] >= 0 ? 0 : 1, 38)
     }
   }
 
