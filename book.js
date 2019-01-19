@@ -1,5 +1,4 @@
 const UInt64BE = require('int64-buffer').Uint64BE
-const Int64BE = require('int64-buffer').Int64BE
 const BN = require('bignumber.js')
 const libCommon = require('./common')
 
@@ -33,7 +32,7 @@ const MSG_TYPES = {
   8 + // PERIOD
   8 + // RATE
   8 + // AMOUNT
-  1 + // SIGN
+  1 // SIGN
 }
 
 const getBookMsgSize = (symType, prl) => {
