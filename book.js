@@ -66,12 +66,12 @@ const fBookEntry = (symType, symId, prl, e, seq) => {
   } else {
     if (prl[0] === 'R') {
       b.fill((new UInt64BE(e[1])).toBuffer(), 14)
-      b.fill((new UInt64BE(nBN(e[3]).times(libCommon.DEF_MULTIPLIER).dp(0).toString(16), 16)).toBuffer(), 20)
-      b.fill((new UInt64BE(nBN(e[4]).times(libCommon.DEF_MULTIPLIER).dp(0).toString(16), 16)).toBuffer(), 28)
+      b.fill((new UInt64BE(nBN(e[3]).times(libCommon.DEF_MULTIPLIER).dp(0).toString(16), 16)).toBuffer(), 22)
+      b.fill((new UInt64BE(nBN(e[4]).times(libCommon.DEF_MULTIPLIER).dp(0).toString(16), 16)).toBuffer(), 30)
     } else {
       b.fill((new UInt64BE(nBN(e[1]).times(libCommon.DEF_MULTIPLIER).dp(0).toString(16), 16)).toBuffer(), 14)
-      b.fill((new UInt64BE(e[3])).toBuffer(), 20)
-      b.fill((new UInt64BE(nBN(e[4]).times(libCommon.DEF_MULTIPLIER).dp(0).toString(16), 16)).toBuffer(), 28)
+      b.fill((new UInt64BE(e[3])).toBuffer(), 22)
+      b.fill((new UInt64BE(nBN(e[4]).times(libCommon.DEF_MULTIPLIER).dp(0).toString(16), 16)).toBuffer(), 30)
     }
   }
 
