@@ -7,43 +7,28 @@ const nBN = v => {
 }
 
 const MSG_TYPES = {
-  t_bu_a:
+  t_bu:
   4 + // SYM
   8 + // PRICE
   8 + // CNT
   8 +  // AMOUNT
   1, // SIGN
-  t_bu_r:
-  4 + // SYM
-  8 + // ID
-  8 + // PRICE
-  8 +  // AMOUNT
-  1, // SIGN
-  f_bu_a:
+  f_bu:
   4 + // SYM
   8 + // RATE
   2 + // PERIOD
   4 + // CNT
   8 + // AMOUNT
-  1, // SIGN
-  f_bu_r:
-  4 + // SYM
-  8 + // ID
-  8 + // PERIOD
-  8 + // RATE
-  8 + // AMOUNT
   1 // SIGN
 }
 
-const getBookMsgSize = (symType, prl) => {
-  const sfx = prl[0] === 'R' ? 'r' : 'a'
-
+const getBookMsgSize = (symType) => {
   return 8 + // SEQ 
-    MSG_TYPES[`${symType}_bu_${sfx}`]
+    MSG_TYPES[`${symType}_bu`]
 }
 
-const fBookCheckPoint = (symType, symId, prl, type, seq) => {
-  const msize = getBookMsgSize(symType, prl)
+const fBookCheckPoint = (symType, symId, type, seq) => {
+  const msize = getBookMsgSize(symType)
 
   const b = Buffer.allocUnsafe(1 + 1 + msize)
 
@@ -55,8 +40,8 @@ const fBookCheckPoint = (symType, symId, prl, type, seq) => {
   return b
 }
 
-const fBookEntry = (symType, symId, prl, e, seq) => {
-  const msize = getBookMsgSize(symType, prl)
+const fBookEntry = (symType, symId, e, seq) => {
+  const msize = getBookMsgSize(symType)
 
   const b = Buffer.allocUnsafe(1 + 1 + msize)
 
@@ -68,17 +53,10 @@ const fBookEntry = (symType, symId, prl, e, seq) => {
   if (symType === 'f') {
 
   } else {
-    if (prl[0] === 'R') {
-      b.fill((new UInt64BE(e[1])).toBuffer(), 14)
-      b.fill((new UInt64BE(nBN(e[3]).times(libCommon.DEF_MULTIPLIER).dp(0).toString(16), 16)).toBuffer(), 22)
-      b.fill((new UInt64BE(nBN(e[4]).times(libCommon.DEF_MULTIPLIER).abs().dp(0).toString(16), 16)).toBuffer(), 30),
-      b.writeUInt8(e[4] >= 0 ? 0 : 1, 38)
-    } else {
-      b.fill((new UInt64BE(nBN(e[1]).times(libCommon.DEF_MULTIPLIER).dp(0).toString(16), 16)).toBuffer(), 14)
-      b.fill((new UInt64BE(e[3])).toBuffer(), 22)
-      b.fill((new UInt64BE(nBN(e[4]).times(libCommon.DEF_MULTIPLIER).abs().dp(0).toString(16), 16)).toBuffer(), 30),
-      b.writeUInt8(e[4] >= 0 ? 0 : 1, 38)
-    }
+    b.fill((new UInt64BE(e[1])).toBuffer(), 14)
+    b.fill((new UInt64BE(nBN(e[3]).times(libCommon.DEF_MULTIPLIER).dp(0).toString(16), 16)).toBuffer(), 22)
+    b.fill((new UInt64BE(nBN(e[4]).times(libCommon.DEF_MULTIPLIER).abs().dp(0).toString(16), 16)).toBuffer(), 30)
+    b.writeUInt8(e[4] >= 0 ? 0 : 1, 38)
   }
 
   return b
@@ -86,5 +64,5 @@ const fBookEntry = (symType, symId, prl, e, seq) => {
 
 module.exports = {
   fBookCheckPoint: fBookCheckPoint,
-  fBookEntry: fBookEntry,
+  fBookEntry: fBookEntry
 }
