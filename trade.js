@@ -32,19 +32,18 @@ const fTradeEntry = (symType, symId, e, seq) => {
   b.writeUInt8(msize, 1)
   b.fill((new UInt64BE(seq)).toBuffer(), 2)
   b.writeUInt32BE(symId, 10)
-  b.writeUInt8(e[6], 14)
 
   if (symType === 'f') {
-    b.fill((new UInt64BE(e.id)).toBuffer(), 15)
-    b.fill((new UInt64BE(libUtils.nBN(e.rate).times(libCommon.DEF_MULTIPLIER).dp(0).toString(16), 16)).toBuffer(), 23)
-    b.fill((new UInt8(e.period)).toBuffer(), 31)
-    b.fill((new UInt64BE(libUtils.nBN(e.amount).times(libCommon.DEF_MULTIPLIER).abs().dp(0).toString(16), 16)).toBuffer(), 32)
-    b.writeUInt8(+e.amount >= 0 ? 0 : 1, 40)
-  } else {
-    b.fill((new UInt64BE(e.id)).toBuffer(), 15)
-    b.fill((new UInt64BE(libUtils.nBN(e.price).times(libCommon.DEF_MULTIPLIER).dp(0).toString(16), 16)).toBuffer(), 23)
+    b.fill((new UInt64BE(e.id)).toBuffer(), 14)
+    b.fill((new UInt64BE(libUtils.nBN(e.rate).times(libCommon.DEF_MULTIPLIER).dp(0).toString(16), 16)).toBuffer(), 22)
+    b.fill((new UInt8(e.period)).toBuffer(), 30)
     b.fill((new UInt64BE(libUtils.nBN(e.amount).times(libCommon.DEF_MULTIPLIER).abs().dp(0).toString(16), 16)).toBuffer(), 31)
     b.writeUInt8(+e.amount >= 0 ? 0 : 1, 39)
+  } else {
+    b.fill((new UInt64BE(e.id)).toBuffer(), 14)
+    b.fill((new UInt64BE(libUtils.nBN(e.price).times(libCommon.DEF_MULTIPLIER).dp(0).toString(16), 16)).toBuffer(), 22)
+    b.fill((new UInt64BE(libUtils.nBN(e.amount).times(libCommon.DEF_MULTIPLIER).abs().dp(0).toString(16), 16)).toBuffer(), 30)
+    b.writeUInt8(+e.amount >= 0 ? 0 : 1, 38)
   }
 
   return b
