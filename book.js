@@ -38,12 +38,12 @@ const fBookCheckPoint = (symType, symId, type, seq) => {
   return b
 }
 
-const fBookEntry = (symType, symId, e, seq) => {
+const fBookEntry = (symType, symId, e, type, seq) => {
   const msize = getBookMsgSize(symType)
 
   const b = Buffer.allocUnsafe(1 + 1 + msize)
 
-  b.writeUInt8(25, 0)
+  b.writeUInt8(20 + type, 0)
   b.writeUInt8(msize, 1)
   b.fill((new UInt64BE(seq)).toBuffer(), 2)
   b.writeUInt32BE(symId, 10)
