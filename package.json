@@ -7,7 +7,7 @@
     "bitfinex"
   ],
   "dependencies": {
-    "bignumber.js": "^8.0.2",
+    "bignumber.js": "^9.0.0",
     "int64-buffer": "^0.99.1007"
   },
   "engine": {
